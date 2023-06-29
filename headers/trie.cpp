@@ -33,21 +33,19 @@ std::string alphabetize_string(std::string input) {
 
 bool trie::insert(std::string input){
     trie_elem *current = &(this->root_element);
-    //alphabetize input for trie creation
-    input = alphabetize_string(input);
 
     //We can now safely iterate through the entire input string and cache each point into the trie.
-    for(char character : input){
+    for(char character : alphabetize_string(input)){
         if(current->children.find(character) == current->children.end()){
             //Branch of trie does not currently exist, implement it in
             trie_elem next_branch;
-            next_branch.value = character;
             next_branch.end_of_word = false;
             current->children.insert({character, next_branch});
         }
         current = &(current->children.at(character));
     }
     current->end_of_word = true;
+    current->value=input;
     
     return true;
 }

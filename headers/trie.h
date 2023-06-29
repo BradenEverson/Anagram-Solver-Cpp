@@ -5,7 +5,7 @@
 
 class trie_elem{
     public:
-        char value;
+        std::string value;
         std::unordered_map<char, trie_elem> children;
         bool end_of_word;
 };
